@@ -65,6 +65,14 @@ public class AppTest {
             facebookApp.getFriendsList(null);
         }, "Null profile link should throw IllegalArgumentException");
         //System.out.println("The link is null");
+    }
 
+    @Test
+    public void testPerformance() {
+        Assertions.assertTimeout(java.time.Duration.ofMillis(500), () -> {
+            List <String> friends = facebookApp.getFriendsList("https://facebook.com/cecci");
+            Assertions.assertNotNull(friends, "Friends list should not be null");
+        }, "Fetching the friend list should complete within 500ms.");
+        System.out.println("Fetches friend list within 500ms");
     }
 }
